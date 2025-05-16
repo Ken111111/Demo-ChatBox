@@ -1,0 +1,9 @@
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild" # Khuyến nghị dùng esbuild cho tốc độ
+
+# Nếu bạn muốn function có thể truy cập được từ đường dẫn ngắn hơn
+# [[redirects]]
+#  from = "/api/*"
+#  to = "/.netlify/functions/:splat"
+#  status = 200

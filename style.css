@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    /* Tăng padding-bottom để chatbox không che nội dung khi mở rộng hoàn toàn trên mobile */
+    padding-bottom: 100px; /* Có thể cần điều chỉnh tùy theo chiều cao chatbox trên mobile */
+}
+
+.chatbox {
+    position: fixed;
+    bottom: 15px; /* Giảm một chút cho mobile */
+    right: 15px;  /* Giảm một chút cho mobile */
+    width: 350px; /* Chiều rộng mặc định cho desktop */
+    /* Đảm bảo không tràn màn hình, trừ đi khoảng cách lề */
+    max-width: calc(100vw - 30px); /* 15px mỗi bên */
+    background-color: #fff;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden; /* Quan trọng cho hiệu ứng và bo góc */
+    z-index: 1000;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out, bottom 0.3s ease-in-out, right 0.3s ease-in-out;
+}
+
+.chatbox-header {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px 10px 0 0; /* Giữ bo góc trên */
+}
+
+.chatbox-title {
+    font-weight: bold;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+}
+
+.chatbox-toggle-icon i {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.chatbox-body {
+    height: 450px; /* Chiều cao mặc định cho desktop */
+    max-height: 450px; /* Quan trọng cho animation */
+    overflow-y: auto; /* Cho phép cuộn nếu nội dung dài */
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out,
+                height 0.3s ease-in-out; /* Thêm transition cho height */
+    padding: 0; /* Iframe sẽ chiếm toàn bộ */
+    background-color: #f9f9f9; /* Màu nền cho body nếu iframe không full */
+}
+
+/* Trạng thái thu nhỏ (collapsed) */
+.chatbox.collapsed .chatbox-body {
+    max-height: 0;
+    height: 0; /* Đảm bảo height cũng về 0 */
+    padding-top: 0; /* Xóa padding khi thu nhỏ */
+    padding-bottom: 0; /* Xóa padding khi thu nhỏ */
+    overflow: hidden; /* Ẩn hoàn toàn nội dung */
+    border-top: none; /* Nếu bạn có border-top cho body */
+}
+
+.chatbox.collapsed .chatbox-toggle-icon i {
+    transform: rotate(180deg); /* Xoay icon mũi tên xuống */
+}
+
+/* === Media Queries cho Responsive === */
+
+/* Máy tính bảng và các thiết bị nhỏ hơn (ví dụ: <= 768px) */
+@media (max-width: 768px) {
+
+
+    .chatbox-body {
+        height: 400px; /* Giảm chiều cao một chút cho tablet */
+        max-height: 400px;
+    }
+}
+
+/* Điện thoại di động (ví dụ: <= 480px) */
+@media (max-width: 480px) {
+    .chatbox {
+        /* Cho chatbox chiếm gần toàn bộ chiều rộng khi mở rộng trên điện thoại */
+        /* Chỉ áp dụng khi không bị thu nhỏ (collapsed) */
+        /* Sẽ dùng JS để thêm class khi mở rộng trên mobile nếu cần */
+        width: calc(100vw - 30px); /* Chiếm gần full chiều rộng, trừ 15px lề mỗi bên */
+        right: 15px;
+        bottom: 15px;
+        /* Nếu muốn chatbox khi mở rộng sẽ chiếm toàn bộ chiều cao thì phức tạp hơn,
+           cần JavaScript để thay đổi position thành full screen.
+           Hiện tại chỉ giữ nguyên vị trí bottom-right. */
+    }
+
+
+
+    .chatbox-header {
+        padding: 10px 12px; /* Giảm padding header một chút */
+    }
+
+    .chatbox-title {
+        font-size: 14px; /* Giảm font chữ tiêu đề */
+    }
+
+    .chatbox-toggle-icon i {
+        font-size: 14px; /* Giảm font chữ icon */
+    }
+
+    .chatbox-body {
+        height: calc(100vh - 150px); /* Chiều cao có thể tùy chỉnh, ví dụ: chiếm phần lớn màn hình trừ header và một khoảng trống */
+        /* Hoặc một giá trị cố định nhỏ hơn: */
+        /* height: 350px; */
+        max-height: calc(100vh - 120px); /* Đảm bảo không quá cao */
+    }
+
+    /* Nếu muốn chatbox khi mở rộng trên mobile sẽ trông giống app hơn (full width, gần full height) */
+    .chatbox.fullscreen-mobile:not(.collapsed) {
+        width: 100vw;
+        height: 100vh;
+        bottom: 0;
+        right: 0;
+        border-radius: 0; /* Bỏ bo góc khi full screen */
+    }
+    .chatbox.fullscreen-mobile:not(.collapsed) .chatbox-header {
+        border-radius: 0;
+    }
+    .chatbox.fullscreen-mobile:not(.collapsed) .chatbox-body {
+        height: calc(100% - 45px); /* Chiều cao của header ~44px */
+        max-height: calc(100% - 45px);
+    }
+}
