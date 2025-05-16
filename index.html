@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbox AI</title>
+    <title>Chatbox AI của Quang</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome để có icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
     <h1>Trang Web Cá Nhân Của Tôi</h1>
     <p>Chào mừng bạn đến với trang web của tôi. Hãy hỏi AI nếu bạn có thắc mắc nhé!</p>
+    <p>Bạn có thể hỏi về kinh nghiệm, kỹ năng, dự án của tôi, hoặc bất cứ điều gì bạn muốn biết thêm.</p>
 
-    <div id="aiChatbox" class="chatbox"> <!-- Ban đầu có thể thêm class "collapsed" nếu muốn thu nhỏ -->
+    <!-- Khung Chatbox -->
+    <div id="aiChatbox" class="chatbox"> <!-- Thêm class "collapsed" nếu muốn mặc định thu nhỏ -->
         <div id="chatboxHeader" class="chatbox-header">
             <span class="chatbox-title">Chat với AI của Quang</span>
             <span id="chatboxToggleIcon" class="chatbox-toggle-icon">
@@ -20,11 +23,18 @@
             </span>
         </div>
         <div id="chatboxBody" class="chatbox-body">
-            <iframe
-                src="https://widget.preny.ai/widget/YOUR_WIDGET_ID_FROM_PRENY"
-                style="width: 100%; height: 100%; border: none;"
-                title="Preny AI Chatbot">
-            </iframe>
+            <!-- Khu vực hiển thị tin nhắn -->
+            <div id="chatMessages" class="chat-messages">
+                <!-- Tin nhắn chào mừng ban đầu từ bot -->
+                <div class="message bot-message">
+                    <p>Chào bạn! Bạn muốn hỏi gì về mình không? Mình có thể trả lời các câu hỏi về kinh nghiệm, kỹ năng, dự án, hoặc những thông tin khác về Tuấn Quang.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Phần footer cho việc nhập liệu -->
+        <div class="chatbox-footer">
+            <input type="text" id="userInput" placeholder="Nhập câu hỏi của bạn..." autocomplete="off">
+            <button id="sendMessageBtn"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
