@@ -27,7 +27,7 @@ exports.handler = async function(event, context) {
 
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ 
-            model: "gemini-pro", // Hoặc "gemini-1.5-flash-latest" nếu bạn muốn nhanh hơn và có thể ít chính xác hơn một chút
+            model: "gemini-1.0-pro-latest", // Hoặc "gemini-1.5-flash-latest" nếu bạn muốn nhanh hơn và có thể ít chính xác hơn một chút
             // Cài đặt an toàn (tùy chọn, nhưng nên có)
             safetySettings: [
                 { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
